@@ -1,0 +1,87 @@
+diff -urN hostsentry-0.02.orig/hostSentryConfig.py hostsentry-0.02/hostSentryConfig.py
+--- hostsentry-0.02.orig/hostSentryConfig.py	1999-03-25 22:06:01.000000000 +0000
++++ hostsentry-0.02/hostSentryConfig.py	2004-09-02 12:43:51.965165120 +0000
+@@ -35,7 +35,7 @@
+ 
+ # This is the default config file. I'll make this more
+ # accessible in the future.
+-CONFIG='/usr/local/abacus/hostsentry/hostsentry.conf'
++CONFIG='/etc/hostsentry/hostsentry.conf'
+ 
+ class hostSentryConfig(hostSentryCore):
+                 
+diff -urN hostsentry-0.02.orig/hostSentryStat.py hostsentry-0.02/hostSentryStat.py
+--- hostsentry-0.02.orig/hostSentryStat.py	1999-03-25 22:06:01.000000000 +0000
++++ hostsentry-0.02/hostSentryStat.py	2004-09-02 12:43:51.966164968 +0000
+@@ -138,7 +138,7 @@
+ if __name__ == '__main__':
+ 
+ 
+-	db = '/usr/local/abacus/hostsentry/hostsentry.db'
++	db = '/etc/hostsentry/hostsentry.db'
+ 	oper = hostSentryStat(db)
+ 
+ 	try:
+diff -urN hostsentry-0.02.orig/hostSentryUtmp.py hostsentry-0.02/hostSentryUtmp.py
+--- hostsentry-0.02.orig/hostSentryUtmp.py	1999-03-25 22:06:01.000000000 +0000
++++ hostsentry-0.02/hostSentryUtmp.py	2004-09-02 12:43:51.966164968 +0000
+@@ -33,7 +33,7 @@
+ import sys
+ import string
+ 
+-UTMP_PATH = '/var/log/wtmp'
++UTMP_PATH = '/var/log/wtmpx'
+ 
+ # These methods are still rough around the edges and
+ # only support Linux right now. I'll add BSD support
+@@ -174,7 +174,7 @@
+ 	WTMP_FORMAT = '384/8:32/44:32/76:256'
+ 
+ 
+-	test=hostSentryUtmp('/var/log/wtmp')
++	test=hostSentryUtmp('/var/log/wtmpx')
+ 	test.setLogLevel(99)
+ 	offset = 0
+ 	utmpsize = string.atoi(string.split(WTMP_FORMAT, "/")[0])
+diff -urN hostsentry-0.02.orig/moduleForeignDomain.py hostsentry-0.02/moduleForeignDomain.py
+--- hostsentry-0.02.orig/moduleForeignDomain.py	1999-03-25 22:06:01.000000000 +0000
++++ hostsentry-0.02/moduleForeignDomain.py	2004-09-02 12:46:14.170546616 +0000
+@@ -42,7 +42,7 @@
+ import string
+ import re
+ 
+-ALLOW_FILE = '/moduleForeignDomain.allow'
++ALLOW_FILE = 'moduleForeignDomain.allow'
+ 
+ class moduleForeignDomain(hostSentryCore):
+ 
+@@ -60,7 +60,7 @@
+ 		try:
+ 			config = hostSentryConfig.hostSentryConfig()
+ 			config.configInit()
+-			allowPath = config.parseToken('MODULE_PATH') 
++			allowPath = '/etc/hostsentry/' 
+                         if allowPath == None:
+ 				hostSentryLog.log('adminalert: moduleForeignDomain: MODULE_PATH token not found in config.')
+ 				raise hostSentryError('adminalert: moduleForeignDomain: MODULE_PATH token not found in config.')
+diff -urN hostsentry-0.02.orig/moduleMultipleLogins.py hostsentry-0.02/moduleMultipleLogins.py
+--- hostsentry-0.02.orig/moduleMultipleLogins.py	1999-03-25 22:06:01.000000000 +0000
++++ hostsentry-0.02/moduleMultipleLogins.py	2004-09-02 12:46:52.960649624 +0000
+@@ -46,7 +46,7 @@
+ import re
+ import array
+ 
+-ALLOW_FILE = '/moduleMultipleLogins.allow'
++ALLOW_FILE = 'moduleMultipleLogins.allow'
+ MAX_ALLOW = 99999
+ 
+ class moduleMultipleLogins(hostSentryCore):
+@@ -75,7 +75,7 @@
+ 				raise hostSentryError('adminalert: moduleMultpleLogins: login: Error parsing DB_TTY_FILE from config: %s' % sys.exc_value[0])
+ 
+ 		try:
+-			allowPath = config.parseToken('MODULE_PATH') 
++			allowPath = '/etc/hostsentry/' 
+                         if allowPath == None:
+ 				hostSentryLog.log('adminalert: moduleMultipleLogins: MODULE_PATH token not found in config.')
+ 				raise hostSentryError('adminalert: moduleMultipleLogins: MODULE_PATH token not found in config.')
