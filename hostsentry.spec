@@ -5,12 +5,6 @@ Version:	0.02
 Release:	0.1
 License:	distributable (see LICENSE)
 Group:		Applications/Networking
-Group(de):	Applikationen/Netzwerkwesen
-Group(es):	Aplicaciones/Red
-Group(fr):	Applications/Réseau
-Group(pl):	Aplikacje/Sieciowe
-Group(pt):	Aplicações/Rede
-Group(pt_BR):	Aplicações/Rede
 Source0:	http://www.psionic.com/downloads/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
