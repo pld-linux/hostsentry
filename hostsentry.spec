@@ -47,5 +47,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES LICENSE README* TODO *.conf
 %attr(750,root,root) %dir %{_sysconfdir}
-%attr(640,root,root) %config(noreplace missingok) %{_sysconfdir}/*
+%attr(640,root,root) %config(noreplace,missingok) %{_sysconfdir}/*
 %{_libdir}/abacus
