@@ -6,6 +6,7 @@ Release:	1.1
 License:	distributable (see LICENSE)
 Group:		Applications/Networking
 Source0:	http://www.psionic.com/downloads/%{name}-%{version}.tar.gz
+# Source0-md5:	3de0bbb7d456bb53683de56dfdf98362
 Source1:	%{name}.conf
 URL:		http://www.psionic.com/products/
 Requires:	python
