@@ -37,14 +37,12 @@ install hostsentry.{action,ignore,modules} *.allow $RPM_BUILD_ROOT%{_sysconfdir}
 install host*.py $RPM_BUILD_ROOT%{_libdir}/abacus/hostsentry
 install module*.py $RPM_BUILD_ROOT%{_libdir}/abacus/hostsentry/modules
 
-gzip -9nf CHANGES LICENSE README* TODO *.conf
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc CHANGES LICENSE README* TODO *.conf
 %attr(750,root,root) %dir %{_sysconfdir}
 %attr(640,root,root) %config(noreplace missingok) %{_sysconfdir}/*
 %{_libdir}/abacus
