@@ -1,18 +1,14 @@
 Summary:	Host based login anomaly detection and response tool
-Summary(pl):	Program wykrywajacy nienormalne proby logowania do komputera
+Summary(pl):	Program wykrywajacy nienormalne próby logowania do komputera
 Name:		hostsentry
 Version:	0.02
-Release:	0.1
+Release:	1.1
 License:	distributable (see LICENSE)
 Group:		Applications/Networking
 Source0:	http://www.psionic.com/downloads/%{name}-%{version}.tar.gz
-Source1:	%{name}.init
-Source2:	%{name}.sysconfig
-URL:		http://www.psionic.com/products/hostsentry/
-Prereq:		textutils
-Prereq:		sed
-Prereq:		rc-scripts
-Prereq:		/sbin/chkconfig
+Source1:	%{name}.conf
+URL:		http://www.psionic.com/products/
+Requires:	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/hostsentry
@@ -32,49 +28,23 @@ portów dla internetowej spo³eczno¶ci.
 %prep
 %setup  -q
 
-%build
-%{__make} linux CFLAGS="%{rpmcflags} -Wall"
-
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_libdir}/abacus/hostsentry/modules}
 
-%{__make} install INSTALLDIR=$RPM_BUILD_ROOT
-install ignore.sh $RPM_BUILD_ROOT%{_bindir}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
+install hostsentry.{action,ignore,modules} *.allow $RPM_BUILD_ROOT%{_sysconfdir}
+install host*.py $RPM_BUILD_ROOT%{_libdir}/abacus/hostsentry
+install module*.py $RPM_BUILD_ROOT%{_libdir}/abacus/hostsentry/modules
 
-gzip -9nf README* CHANGES CREDITS LICENSE
-
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/hostsentry
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/hostsentry
+gzip -9nf CHANGES LICENSE README* TODO *.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post -n portsentry
-%{_bindir}/ignore.sh
-/sbin/chkconfig --add hostsentry
-ls --color=none /var/lock/subsys/hostsentry* >/dev/null 2>&1
-if [ $? -eq "0" ]; then
-	/etc/rc.d/init.d/hostsentry restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/hostsentry start\" to start hostsentry daemon."
-fi
-
-%preun -n hostsentry
-if [ "$1" = "0" ]; then
-	ls --color=none /var/lock/subsys/hostsentry* >/dev/null 2>&1
-	if [ $? -eq "0" ]; then
-		/etc/rc.d/init.d/hostsentry stop >&2
-	fi
-	/sbin/chkconfig --del hostsentry
-fi
 
 %files
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(750,root,root) %dir %{_sysconfdir}
-%attr(640,root,root) %config(noreplace) %{_sysconfdir}/hostsentry.conf
-%attr(640,root,root) %config(noreplace missingok) %{_sysconfdir}/hostsentry.ignore
-%attr(755,root,root) %{_bindir}/*
-%attr(640,root,root) %config %verify(not size mtime md5) /etc/sysconfig/*
-%attr(754,root,root) /etc/rc.d/init.d/*
+%attr(640,root,root) %config(noreplace missingok) %{_sysconfdir}/*
+%{_libdir}/abacus
