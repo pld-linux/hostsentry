@@ -2,12 +2,13 @@ Summary:	Host based login anomaly detection and response tool
 Summary(pl):	Program wykrywajacy nienormalne próby logowania do komputera
 Name:		hostsentry
 Version:	0.02
-Release:	1.1
+Release:	1.4
 License:	distributable (see LICENSE)
 Group:		Applications/Networking
 Source0:	http://www.psionic.com/downloads/%{name}-%{version}.tar.gz
 # Source0-md5:	3de0bbb7d456bb53683de56dfdf98362
 Source1:	%{name}.conf
+Patch0:		%{name}-paths.patch
 URL:		http://www.psionic.com/products/
 Requires:	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -28,6 +29,7 @@ portów dla internetowej spo³eczno¶ci.
 
 %prep
 %setup  -q
+%patch0	-p1
 
 %install
 rm -rf $RPM_BUILD_ROOT
