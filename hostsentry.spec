@@ -1,5 +1,5 @@
 Summary:	Host based login anomaly detection and response tool
-Summary(pl):	Program wykrywajacy nienormalne próby logowania do komputera
+Summary(pl.UTF-8):   Program wykrywajacy nienormalne prÃ³by logowania do komputera
 Name:		hostsentry
 Version:	0.02
 Release:	1.1
@@ -21,11 +21,11 @@ Project is an initiative to release low-maintenance, generic, and
 reliable host based intrusion detection software to the Internet
 community.
 
-%description -l pl
-HostSentry jest czê¶ci± zestawu narzêdzi Projektu Abacus. Projekt
-Abacus ma na celu stworzenie ogólnego, pewnego i wymagaj±cego
-niewielkiej obs³ugi oprogramowania do wykrywania prób skanowania
-portów dla internetowej spo³eczno¶ci.
+%description -l pl.UTF-8
+HostSentry jest czÄ™Å›ciÄ… zestawu narzÄ™dzi Projektu Abacus. Projekt
+Abacus ma na celu stworzenie ogÃ³lnego, pewnego i wymagajÄ…cego
+niewielkiej obsÅ‚ugi oprogramowania do wykrywania prÃ³b skanowania
+portÃ³w dla internetowej spoÅ‚ecznoÅ›ci.
 
 %prep
 %setup  -q
