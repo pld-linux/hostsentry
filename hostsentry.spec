@@ -1,5 +1,5 @@
 Summary:	Host based login anomaly detection and response tool
-Summary(pl.UTF-8):   Program wykrywajacy nienormalne próby logowania do komputera
+Summary(pl.UTF-8):	Program wykrywajacy nienormalne próby logowania do komputera
 Name:		hostsentry
 Version:	0.02
 Release:	1.1
